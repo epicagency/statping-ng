@@ -304,10 +304,10 @@ func (s *Service) OnlineSince(ago time.Time) float32 {
 
 // Uptime returns the duration of how long the service was online
 func (s Service) Uptime() utils.Duration {
-	return utils.Duration{Duration: utils.Now().Sub(s.LastOffline)}
+	return utils.Duration{Duration: utils.Now().Sub(s.LastOnline)}
 }
 
 // Downtime returns the duration of how long the service has been offline
 func (s Service) Downtime() utils.Duration {
-	return utils.Duration{Duration: utils.Now().Sub(s.LastOnline)}
+	return utils.Duration{Duration: utils.Now().Sub(s.LastOffline)}
 }
