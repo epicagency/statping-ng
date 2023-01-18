@@ -18,6 +18,7 @@ type Service struct {
 	Expected            null.NullString       `gorm:"column:expected" json:"expected" yaml:"expected" scope:"user,admin"`
 	ExpectedStatus      int                   `gorm:"default:200;column:expected_status" json:"expected_status" yaml:"expected_status" scope:"user,admin"`
 	Interval            int                   `gorm:"default:30;column:check_interval" json:"check_interval" yaml:"check_interval"`
+	DownInterval        int                   `gorm:"default:30;column:down_check_interval" json:"down_check_interval" yaml:"down_check_interval"`
 	Type                string                `gorm:"column:check_type" json:"type" scope:"user,admin" yaml:"type"`
 	Method              string                `gorm:"column:method" json:"method" scope:"user,admin" yaml:"method"`
 	PostData            null.NullString       `gorm:"column:post_data" json:"post_data" scope:"user,admin" yaml:"post_data"`

@@ -21,7 +21,7 @@ test: clean compile
 	go test -v -p=1 -ldflags="-X main.VERSION=${VERSION} -X main.COMMIT=${COMMIT}" -coverprofile=coverage.out ./...
 
 build: clean
-	CGO_ENABLED=1 go build -a -ldflags "-s -w -X main.VERSION=${VERSION} -X main.COMMIT=${COMMIT}" -o statping --tags "netgo osusergo" ./cmd
+	CGO_CFLAGS="-g -O2 -Wno-return-local-addr" CGO_ENABLED=1 go build -a -ldflags "-s -w -X main.VERSION=${VERSION} -X main.COMMIT=${COMMIT}" -o statping --tags "netgo osusergo" ./cmd
 
 go-build: clean
 	rm -rf source/dist
@@ -160,7 +160,7 @@ install-darwin:
 	mv $(BINARY_NAME) /usr/local/bin/$(BINARY_NAME)
 
 generate:
-	go generate ./...
+	GOFLAGS=-mod=mod go generate ./...
 
 build-all: clean compile build-folders build-linux build-linux-arm build-darwin build-win compress-folders
 

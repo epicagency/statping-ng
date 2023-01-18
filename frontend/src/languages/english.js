@@ -123,6 +123,7 @@ const english = {
     permalink: "Permalink URL",
     service_public: "Public Service",
     check_interval: "Check Interval",
+    down_check_interval: "Down Check Interval",
     service_endpoint: "Service Endpoint",
     service_check: "Service Check Type",
     service_timeout: "Request Timeout",

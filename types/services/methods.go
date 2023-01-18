@@ -6,15 +6,16 @@ import (
 	"crypto/x509"
 	"encoding/hex"
 	"fmt"
+	"io/ioutil"
+	"sort"
+	"strconv"
+	"time"
+
 	"github.com/statping-ng/statping-ng/types"
 	"github.com/statping-ng/statping-ng/types/errors"
 	"github.com/statping-ng/statping-ng/types/failures"
 	"github.com/statping-ng/statping-ng/types/hits"
 	"github.com/statping-ng/statping-ng/utils"
-	"io/ioutil"
-	"sort"
-	"strconv"
-	"time"
 )
 
 const limitedFailures = 25
@@ -62,7 +63,11 @@ func (s *Service) LoadTLSCert() (*tls.Config, error) {
 }
 
 func (s Service) Duration() time.Duration {
-	return time.Duration(s.Interval) * time.Second
+	if s.Online {
+		return time.Duration(s.Interval) * time.Second
+	} else {
+		return time.Duration(s.DownInterval) * time.Second
+	}
 }
 
 // Start will create a channel for the service checking go routine

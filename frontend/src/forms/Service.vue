@@ -65,6 +65,18 @@
                 </div>
             </div>
 
+            <div v-if="service.type !== 'static'" class="form-group row">
+                <label for="service_interval" class="col-sm-4 col-form-label">{{ $t('down_check_interval') }}</label>
+                <div class="col-sm-6">
+                    <span class="slider-info">{{secondsHumanize(service.down_check_interval)}}</span>
+                    <input v-model.number="service.down_check_interval" type="range" class="slider" id="service_interval" min="1" max="1800" :step="1">
+                    <small id="interval" class="form-text text-muted">Interval to check your service when it's down</small>
+                </div>
+                <div class="col-sm-2">
+                    <input v-model.number="service.down_check_interval" type="number" name="down_check_interval" class="form-control">
+                </div>
+            </div>
+
             </div>
         </div>
 
@@ -299,6 +311,7 @@
                   expected_status: 200,
                   port: 80,
                   check_interval: 60,
+                  down_check_interval: 5,
                   timeout: 15,
                   permalink: "",
                   order: 1,
@@ -394,6 +407,7 @@
               delete s.latency
               delete s.online_24_hours
               s.check_interval = parseInt(s.check_interval)
+              s.down_check_interval = parseInt(s.down_check_interval)
               s.timeout = parseInt(s.timeout)
               s.port = parseInt(s.port)
               s.notify_after = parseInt(s.notify_after)
